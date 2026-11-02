@@ -18,11 +18,6 @@ namespace AdminMenu.Catalog;
 /// </summary>
 internal static class LevelCatalog
 {
-    private const string CategoryLevels = "Levels";
-    private const string CategoryShops = "Shops";
-    private const string CategoryArenas = "Arenas";
-    private const string CategorySpecial = "Special";
-
     private static readonly List<CatalogEntry<Level>> Entries = new List<CatalogEntry<Level>>();
     private static List<CatalogGroup<Level>> _groups = new List<CatalogGroup<Level>>();
 
@@ -72,14 +67,15 @@ internal static class LevelCatalog
         HashSet<string> seen = new HashSet<string>(StringComparer.Ordinal);
         HashSet<Level> modded = CollectModded();
 
-        AddList(runManager.levels, CategoryLevels, 0, modded, seen);
-        AddList(runManager.levelShop, CategoryShops, 1, modded, seen);
-        AddList(runManager.levelArena, CategoryArenas, 2, modded, seen);
+        AddList(runManager.levels, Strings.Get(StringKeys.CategoryLevels), 0, modded, seen);
+        AddList(runManager.levelShop, Strings.Get(StringKeys.CategoryShops), 1, modded, seen);
+        AddList(runManager.levelArena, Strings.Get(StringKeys.CategoryArenas), 2, modded, seen);
 
         // One-off levels the game keeps in fields rather than in a list.
-        Add(runManager.levelLobby, CategorySpecial, 3, modded, seen);
-        Add(runManager.levelTutorial, CategorySpecial, 3, modded, seen);
-        Add(runManager.levelRecording, CategorySpecial, 3, modded, seen);
+        string special = Strings.Get(StringKeys.CategorySpecial);
+        Add(runManager.levelLobby, special, 3, modded, seen);
+        Add(runManager.levelTutorial, special, 3, modded, seen);
+        Add(runManager.levelRecording, special, 3, modded, seen);
 
         TellDuplicatesApart();
 
@@ -113,7 +109,7 @@ internal static class LevelCatalog
                 continue;
             }
 
-            string asset = GameText.FromPrefabName(entry.Id);
+            string asset = GameText.ForLevel(entry.Id, null);
             if (string.IsNullOrWhiteSpace(asset) ||
                 string.Equals(asset, entry.DisplayName, StringComparison.CurrentCultureIgnoreCase))
             {
@@ -184,10 +180,10 @@ internal static class LevelCatalog
             return;
         }
 
-        string displayName = GameText.Resolve(level.NarrativeNameLocalized, level.NarrativeName);
+        string displayName = GameText.Resolve(level.NarrativeNameLocalized, null);
         if (string.IsNullOrWhiteSpace(displayName))
         {
-            displayName = GameText.FromPrefabName(level.name);
+            displayName = GameText.ForLevel(level.name, level.NarrativeName);
         }
 
         Entries.Add(new CatalogEntry<Level>(

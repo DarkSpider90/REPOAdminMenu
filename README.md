@@ -22,7 +22,7 @@ Press **F8** during a run and it opens. Only the host gets it.
 - **Open the extraction point.** Open the next one, or finish the one that is running without meeting the haul.
 - **Show everything on the map.** Reveal every valuable and every cosmetic box in the level.
 - **Two mischief switches.** Enemies die in one hit, and batteries never run out.
-- **Your language.** The menu speaks English and Russian, and item, enemy and upgrade names come from the game, so they are already in whatever language you play in.
+- **Your language.** The menu speaks every language the game does - English, Russian, Ukrainian, German, French, Italian, Spanish (Spain and Latin America), Portuguese (Brazil and Portugal), Polish, Turkish, Swedish, Danish, Finnish, Japanese, Korean, Chinese (Simplified and Traditional), Thai and Arabic - and follows the game: change the language in the game's settings and the menu changes with it. Item, enemy and upgrade names come from the game itself; valuables, which the game only names in English, carry the mod's own translations.
 
 ## Showcase
 
@@ -99,7 +99,7 @@ You can also change everything in-game through REPOConfig if you have it.
 
 ### Localization
 
-**Write Language Template** — off by default. Turn it on and the mod writes `Languages/template.lang` next to itself on the next start, with every line of the menu in English. Copy it to your language code, translate the right-hand side, and the menu picks it up. Anything you leave out falls back to English.
+**Write Language Template** — off by default. Turn it on and the mod writes `Languages/template.lang` next to itself on the next start, with every line of the menu in English. Copy it to a language code (`ru.lang`, `pt-BR.lang`), translate the right-hand side, and the menu picks it up. A file there overrides the built-in translation for that language, so a wording can be fixed without a new release. Anything you leave out falls back to the built-in text.
 
 ### Diagnostics
 

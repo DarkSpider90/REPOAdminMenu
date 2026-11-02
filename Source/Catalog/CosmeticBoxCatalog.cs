@@ -14,8 +14,6 @@ namespace AdminMenu.Catalog;
 /// </summary>
 internal static class CosmeticBoxCatalog
 {
-    private const string CategoryName = "Cosmetic Boxes";
-
     private static readonly List<CatalogEntry<ValuableDirector.CosmeticWorldObjectSetup>> Entries =
         new List<CatalogEntry<ValuableDirector.CosmeticWorldObjectSetup>>();
 
@@ -82,7 +80,7 @@ internal static class CosmeticBoxCatalog
             Entries.Add(new CatalogEntry<ValuableDirector.CosmeticWorldObjectSetup>(
                 rarity.ToString(),
                 Strings.ForRarity(rarity),
-                CategoryName,
+                Strings.Get(StringKeys.CategoryCosmeticBoxes),
                 0,
                 ContentSource.Vanilla,
                 setup));

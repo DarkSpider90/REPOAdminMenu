@@ -165,7 +165,7 @@ internal static class EnemyCatalog
             Entries.Add(new CatalogEntry<EnemySetup>(
                 setup.name,
                 ResolveName(setup),
-                $"Difficulty {difficulty}",
+                Strings.Format(StringKeys.CategoryDifficulty, difficulty),
                 difficulty,
                 moddedNames.Contains(setup.name) ? ContentSource.Mod : ContentSource.Vanilla,
                 setup));

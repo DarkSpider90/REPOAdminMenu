@@ -117,7 +117,7 @@ internal static class ItemCatalog
         Entries.Add(new CatalogEntry<Item>(
             item.name,
             GameText.Resolve(item.itemNameLocalized, item.itemName),
-            GameText.Humanize(item.itemType.ToString()),
+            Strings.ForItemType(item.itemType),
             (int)item.itemType,
             moddedIds.Contains(item.name) ? ContentSource.Mod : ContentSource.Vanilla,
             item));

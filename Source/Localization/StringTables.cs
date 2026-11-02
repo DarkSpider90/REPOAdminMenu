@@ -11,9 +11,9 @@ namespace AdminMenu.Localization;
 /// what every other language falls back to key by key, so a half-finished translation shows
 /// translated text where it has it and English where it does not, never a blank button.
 ///
-/// A language that is not here can be added without rebuilding the mod - see
-/// <see cref="LanguageFiles"/> - which is how the remaining languages the game ships are
-/// meant to arrive.
+/// Every other language the game ships is a <c>.lang</c> file built into the mod (see
+/// <see cref="LanguageFiles"/>) and merged in at startup; a file beside the mod can override
+/// it or add a language without a rebuild.
 /// </summary>
 internal static class StringTables
 {
@@ -76,7 +76,7 @@ internal static class StringTables
                 [StringKeys.LevelShop] = "Shop",
                 [StringKeys.LevelMoney] = "Money",
                 [StringKeys.LevelFreeItems] = "Free items",
-                [StringKeys.LevelExtractionOpen] = "Open extraction point",
+                [StringKeys.LevelExtractionOpen] = "Activate extraction point",
                 [StringKeys.LevelExtractionComplete] = "Complete extraction point",
                 [StringKeys.LevelRevealValuables] = "Reveal all valuables",
                 [StringKeys.LevelRevealBoxes] = "Reveal all cosmetic boxes",
@@ -87,75 +87,46 @@ internal static class StringTables
                 [StringKeys.RarityUltraRare] = "Ultra rare",
 
                 [StringKeys.SourceMod] = "mod",
-            },
 
-            ["ru"] = new Dictionary<string, string>(StringComparer.Ordinal)
-            {
-                [StringKeys.MenuTitle] = "Меню админа",
-                [StringKeys.MenuShort] = "Админ",
-                [StringKeys.MenuClose] = "Закрыть",
-                [StringKeys.MenuBack] = "Назад",
-                [StringKeys.MenuSearch] = "Поиск",
-                [StringKeys.MenuHostOnly] = "Меню доступно только хосту.",
+                [StringKeys.CategoryLevels] = "Levels",
+                [StringKeys.CategoryShops] = "Shops",
+                [StringKeys.CategoryArenas] = "Arenas",
+                [StringKeys.CategorySpecial] = "Special",
+                [StringKeys.CategoryUpgrades] = "Upgrades",
+                [StringKeys.CategoryCosmeticBoxes] = "Cosmetic boxes",
+                [StringKeys.CategoryDifficulty] = "Difficulty {0}",
 
-                [StringKeys.TabPlayers] = "Игроки",
-                [StringKeys.TabSpawn] = "Спавн",
-                [StringKeys.TabLevel] = "Уровень",
-                [StringKeys.TabOptions] = "Опции",
+                [StringKeys.ItemTypePrefix + "drone"] = "Drones",
+                [StringKeys.ItemTypePrefix + "orb"] = "Orbs",
+                [StringKeys.ItemTypePrefix + "cart"] = "Carts",
+                [StringKeys.ItemTypePrefix + "item_upgrade"] = "Item upgrades",
+                [StringKeys.ItemTypePrefix + "player_upgrade"] = "Player upgrades",
+                [StringKeys.ItemTypePrefix + "power_crystal"] = "Power crystals",
+                [StringKeys.ItemTypePrefix + "grenade"] = "Grenades",
+                [StringKeys.ItemTypePrefix + "melee"] = "Melee weapons",
+                [StringKeys.ItemTypePrefix + "healthPack"] = "Health packs",
+                [StringKeys.ItemTypePrefix + "gun"] = "Guns",
+                [StringKeys.ItemTypePrefix + "tracker"] = "Trackers",
+                [StringKeys.ItemTypePrefix + "mine"] = "Mines",
+                [StringKeys.ItemTypePrefix + "pocket_cart"] = "Pocket carts",
+                [StringKeys.ItemTypePrefix + "tool"] = "Tools",
+                [StringKeys.ItemTypePrefix + "vehicle"] = "Vehicles",
+                [StringKeys.ItemTypePrefix + "launcher"] = "Launchers",
 
-                [StringKeys.PlayersTarget] = "Цель",
-                [StringKeys.PlayersFollowMe] = "За мной",
-                [StringKeys.PlayersUpgrades] = "Улучшения",
-                [StringKeys.PlayersTeleport] = "Телепорт",
-                [StringKeys.PlayersDead] = "мёртв",
-                [StringKeys.PlayersHost] = "хост",
+                [StringKeys.ValuableSizePrefix + "Tiny"] = "Tiny",
+                [StringKeys.ValuableSizePrefix + "Small"] = "Small",
+                [StringKeys.ValuableSizePrefix + "Medium"] = "Medium",
+                [StringKeys.ValuableSizePrefix + "Big"] = "Big",
+                [StringKeys.ValuableSizePrefix + "Wide"] = "Wide",
+                [StringKeys.ValuableSizePrefix + "Tall"] = "Tall",
+                [StringKeys.ValuableSizePrefix + "VeryTall"] = "Very tall",
 
-                [StringKeys.UpgradesLevel] = "Уровень",
-                [StringKeys.UpgradesClearAll] = "Снять все улучшения",
-
-                [StringKeys.TeleportPlayerToMe] = "Игрока ко мне",
-                [StringKeys.TeleportPlayerTo] = "Отправить к",
-                [StringKeys.TeleportGo] = "Телепортировать",
-                [StringKeys.TeleportMeToPlayer] = "Меня к игроку",
-                [StringKeys.TeleportToTruck] = "К фургону",
-                [StringKeys.TeleportToExtraction] = "К точке вывоза",
-
-                [StringKeys.PlayerGodMode] = "Бессмертие",
-                [StringKeys.PlayerInvisible] = "Невидимость для врагов",
-                [StringKeys.PlayerInfiniteStamina] = "Бесконечная выносливость",
-                [StringKeys.PlayerFreeFlight] = "Свободный полёт",
-                [StringKeys.PlayerInfiniteAmmo] = "Бесконечные патроны",
-                [StringKeys.PlayerOneShotEnemies] = "Враги с одного удара",
-                [StringKeys.PlayerHeal] = "Вылечить",
-                [StringKeys.PlayerKill] = "Убить",
-                [StringKeys.PlayerRevive] = "Оживить",
-
-                [StringKeys.SpawnItems] = "Предметы магазина",
-                [StringKeys.SpawnValuables] = "Ценности",
-                [StringKeys.SpawnEnemies] = "Враги",
-                [StringKeys.SpawnCosmeticBoxes] = "Косметик-боксы",
-                [StringKeys.SpawnCount] = "Количество",
-                [StringKeys.SpawnTarget] = "Спавн для",
-                [StringKeys.SpawnCountdown] = "Спавн {0} через {1}",
-
-                [StringKeys.LevelSelect] = "Сменить уровень",
-                [StringKeys.LevelCompleted] = "Пройдено уровней",
-                [StringKeys.LevelShop] = "Магазин",
-                [StringKeys.LevelMoney] = "Деньги",
-                [StringKeys.LevelFreeItems] = "Бесплатные предметы",
-                [StringKeys.LevelExtractionOpen] = "Открыть точку вывоза",
-                [StringKeys.LevelExtractionComplete] = "Завершить точку вывоза",
-                [StringKeys.LevelRevealValuables] = "Показать все ценности",
-                [StringKeys.LevelRevealBoxes] = "Показать все косметик-боксы",
-
-                [StringKeys.RarityCommon] = "Обычный",
-                [StringKeys.RarityUncommon] = "Необычный",
-                [StringKeys.RarityRare] = "Редкий",
-                [StringKeys.RarityUltraRare] = "Очень редкий",
-
-                [StringKeys.SourceMod] = "мод",
+                [StringKeys.ValuableNameFormat] = "{1} {0}",
             },
         };
+
+    /// <summary>The complete English table, which is what a template is written from.</summary>
+    internal static IReadOnlyDictionary<string, string> Fallback => Tables[FallbackLocaleCode];
 
     /// <summary>Locale codes the mod has text for, built-in and loaded from file.</summary>
     internal static IEnumerable<string> LocaleCodes => Tables.Keys;

@@ -68,8 +68,8 @@ internal static class LocaleWatcher
     /// <summary>Name of the language the game is in, for the menu's own footer.</summary>
     internal static string ActiveLocaleName()
     {
-        LocaleAsset locale = LocalizationManager.instance?.ActiveLocale;
-        return locale == null ? string.Empty : locale.NativeName ?? string.Empty;
+        LocaleAsset locale = Strings.ActiveLocaleAsset();
+        return locale == null ? Strings.ActiveLocaleCode() : locale.NativeName ?? string.Empty;
     }
 
     private static void OnLocalizationChanged()

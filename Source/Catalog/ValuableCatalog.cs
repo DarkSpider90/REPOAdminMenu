@@ -177,8 +177,8 @@ internal static class ValuableCatalog
 
         Entries.Add(new CatalogEntry<PrefabRef>(
             prefabRef.PrefabName,
-            GameText.FromPrefabName(prefabRef.PrefabName),
-            GameText.Humanize(volume.ToString()),
+            GameText.ForValuable(prefabRef.PrefabName),
+            Strings.ForValuableSize(volume),
             (int)volume,
             modded ? ContentSource.Mod : ContentSource.Vanilla,
             prefabRef));

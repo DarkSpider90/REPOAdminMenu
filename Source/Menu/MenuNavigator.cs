@@ -134,7 +134,7 @@ internal static class MenuNavigator
         string text = isRoot ? Strings.Get(StringKeys.MenuClose) : "← " + Strings.Get(StringKeys.MenuBack);
         Action onClick = isRoot ? (Action)CloseAll : Back;
 
-        page.AddElement(parent => MenuAPI.CreateREPOButton(text, onClick, parent, FooterPosition));
+        page.AddElement(parent => MenuAPI.CreateREPOButton(Strings.ForDisplay(text), onClick, parent, FooterPosition));
     }
 
     private static void Close(REPOPopupPage page)

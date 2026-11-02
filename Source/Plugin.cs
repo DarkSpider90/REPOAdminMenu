@@ -29,6 +29,7 @@ public sealed class Plugin : BaseUnityPlugin
 
         AdminMenuSettings.Bind(Config);
 
+        LanguageFiles.LoadEmbedded();
         LanguageFiles.LoadAll();
         if (AdminMenuSettings.WriteLanguageTemplate.Value)
         {

@@ -36,6 +36,25 @@ internal static class Strings
         return StringTables.TryGet(StringTables.FallbackLocaleCode, key, out text) ? text : key;
     }
 
+    /// <summary>
+    /// Text in the game's language only - no English fallback, and nothing at all while the
+    /// game is in English. For names the game ships in English: when there is no translation
+    /// the caller keeps the game's own name rather than taking ours.
+    /// </summary>
+    internal static bool TryGetLocal(string key, out string text)
+    {
+        text = null;
+        string code = ActiveLocaleCode();
+        string baseCode = BaseLocaleCode(code);
+
+        if (string.Equals(baseCode ?? code, StringTables.FallbackLocaleCode, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        return StringTables.TryGet(code, key, out text) || StringTables.TryGet(baseCode, key, out text);
+    }
+
     internal static string Format(string key, params object[] args)
     {
         string text = Get(key);
@@ -52,6 +71,16 @@ internal static class Strings
         }
     }
 
+    /// <summary>
+    /// A finished line as it should be handed to TextMeshPro. Only right-to-left languages
+    /// change anything; applied once, where text leaves the mod, because lines are put
+    /// together from the menu's words and the game's names.
+    /// </summary>
+    internal static string ForDisplay(string text)
+    {
+        return ArabicText.IsActive ? ArabicText.ToVisual(text) : text;
+    }
+
     /// <summary>The menu's own label for a cosmetic box rarity.</summary>
     internal static string ForRarity(SemiFunc.Rarity rarity)
     {
@@ -65,17 +94,63 @@ internal static class Strings
         }
     }
 
-    /// <summary>The code of the language the game is in, or English if it is not up yet.</summary>
+    /// <summary>The menu's own label for a kind of shop item.</summary>
+    internal static string ForItemType(SemiFunc.itemType type)
+    {
+        return ForEnum(StringKeys.ItemTypePrefix, type.ToString());
+    }
+
+    /// <summary>The menu's own label for a valuable's size.</summary>
+    internal static string ForValuableSize(ValuableVolume.Type size)
+    {
+        return ForEnum(StringKeys.ValuableSizePrefix, size.ToString());
+    }
+
+    /// <summary>
+    /// Text for one value of a game enum. A value the tables do not know - a game update
+    /// added it - is spaced out from its name rather than shown as a raw key.
+    /// </summary>
+    private static string ForEnum(string prefix, string valueName)
+    {
+        string key = prefix + valueName;
+        string text = Get(key);
+        return text == key ? GameText.Humanize(valueName) : text;
+    }
+
+    /// <summary>
+    /// The code of the language the game is in, or English if it is not up yet.
+    ///
+    /// Read the way the game reads it itself (<c>SemiFunc.LocaleGetCode</c>, which is the
+    /// localization system's selected locale). <c>LocalizationManager.ActiveLocale</c> is not
+    /// used: it keeps its English default until the language is switched in the settings, so
+    /// a game that started in Russian - from the save or the system language - reads as English.
+    /// </summary>
     internal static string ActiveLocaleCode()
     {
         try
         {
-            string code = LocalizationManager.instance?.ActiveLocale?.LocaleReference?.Identifier.Code;
+            string code = SemiFunc.LocaleGetCode();
             return string.IsNullOrEmpty(code) ? StringTables.FallbackLocaleCode : code;
         }
         catch (Exception)
         {
             return StringTables.FallbackLocaleCode;
+        }
+    }
+
+    /// <summary>The game's settings for the language it is in, or null.</summary>
+    internal static LocaleAsset ActiveLocaleAsset()
+    {
+        try
+        {
+            LocalizationManager manager = LocalizationManager.instance;
+            return manager != null && manager.Locales.TryGetValue(ActiveLocaleCode(), out LocaleAsset locale)
+                ? locale
+                : null;
+        }
+        catch (Exception)
+        {
+            return null;
         }
     }
 

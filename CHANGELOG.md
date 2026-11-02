@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- The menu is translated into all 21 languages the game ships and switches with the game's language setting.
+- Category names (item kinds, valuable sizes, enemy difficulty, level groups) are translated too; they were English in every language.
+- Arabic is joined and laid out right to left, with player names and numbers kept readable.
+- Valuables, which the game names only in English, get adapted names in every language, with the level they come from ("Ваза (Поместье)"). Levels the game leaves unnamed - lobby, arenas, tutorial, the shops - are named too.
+
 ## 0.8.0
 
 - First release. A host-only menu on F8 for players, spawning and the run.

@@ -69,4 +69,27 @@ internal static class StringKeys
     internal const string RarityUltraRare = "rarity.ultra_rare";
 
     internal const string SourceMod = "source.mod";
+
+    internal const string CategoryLevels = "category.levels";
+    internal const string CategoryShops = "category.shops";
+    internal const string CategoryArenas = "category.arenas";
+    internal const string CategorySpecial = "category.special";
+    internal const string CategoryUpgrades = "category.upgrades";
+    internal const string CategoryCosmeticBoxes = "category.cosmetic_boxes";
+    internal const string CategoryDifficulty = "category.difficulty";
+
+    // Shop item kinds, one per SemiFunc.itemType; the suffix is the enum name.
+    internal const string ItemTypePrefix = "item_type.";
+
+    // Valuable sizes, one per ValuableVolume.Type; the suffix is the enum name.
+    internal const string ValuableSizePrefix = "valuable_size.";
+
+    // Names the game itself never translated. The suffix is the prefab name without its
+    // kind ("Manor Vase" for "Valuable Manor Vase", "Lobby" for "Level - Lobby").
+    internal const string ValuableNamePrefix = "valuable.";
+    internal const string ValuableThemePrefix = "valuable_theme.";
+    internal const string LevelNamePrefix = "level_name.";
+
+    // How a valuable and the level it belongs to are put together: {0} the thing, {1} the place.
+    internal const string ValuableNameFormat = "valuable_format";
 }

@@ -7,18 +7,56 @@ using System.Text;
 namespace AdminMenu.Localization;
 
 /// <summary>
-/// Loads menu text for a language from a file beside the mod.
+/// Loads menu text for a language from a <c>.lang</c> file.
 ///
-/// The game ships a long list of languages and this mod cannot be translated into all of them
-/// by whoever builds it, so a language is a file rather than a code change:
-/// <c>Languages/&lt;locale code&gt;.lang</c> next to AdminMenu.dll, one <c>key=value</c> per
-/// line, <c>#</c> for a comment, UTF-8. The locale code is the one the game uses - "ru",
-/// "pt-BR" - and a file's text overrides the built-in table for that language.
+/// A language is a file rather than a code change: one <c>key=value</c> per line, <c>#</c>
+/// for a comment, UTF-8, named after the locale code the game uses - "ru", "pt-BR". Every
+/// language the game ships is built into the DLL this way (<c>Source/Localization/Languages</c>),
+/// and a file in <c>Languages/</c> next to AdminMenu.dll is read afterwards, so it can correct
+/// a built-in translation or add a language without a rebuild.
 /// </summary>
 internal static class LanguageFiles
 {
     private const string FolderName = "Languages";
     private const string FileExtension = ".lang";
+
+    /// <summary>Name prefix the project gives the built-in files; see AdminMenu.csproj.</summary>
+    private const string ResourcePrefix = "AdminMenu.Languages.";
+
+    /// <summary>Loads the translations built into the mod.</summary>
+    internal static void LoadEmbedded()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+
+        foreach (string resource in assembly.GetManifestResourceNames())
+        {
+            if (!resource.StartsWith(ResourcePrefix, StringComparison.Ordinal) ||
+                !resource.EndsWith(FileExtension, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            string localeCode = resource.Substring(
+                ResourcePrefix.Length,
+                resource.Length - ResourcePrefix.Length - FileExtension.Length);
+
+            try
+            {
+                using Stream stream = assembly.GetManifestResourceStream(resource);
+                if (stream == null)
+                {
+                    continue;
+                }
+
+                using StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                StringTables.Merge(localeCode, Parse(reader));
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogWarning($"Could not read the built-in language \"{localeCode}\". {ex.Message}");
+            }
+        }
+    }
 
     /// <summary>
     /// Loads every language file next to the mod. Missing folder is the normal case and says
@@ -101,35 +139,43 @@ internal static class LanguageFiles
 
     private static Dictionary<string, string> Read(string path)
     {
-        Dictionary<string, string> entries = new Dictionary<string, string>(StringComparer.Ordinal);
-
         try
         {
-            foreach (string line in File.ReadAllLines(path, Encoding.UTF8))
-            {
-                string trimmed = line.Trim();
-                if (trimmed.Length == 0 || trimmed[0] == '#')
-                {
-                    continue;
-                }
-
-                int separator = trimmed.IndexOf('=');
-                if (separator <= 0)
-                {
-                    continue;
-                }
-
-                string key = trimmed.Substring(0, separator).Trim();
-                string value = trimmed.Substring(separator + 1).Trim();
-                if (key.Length > 0 && value.Length > 0)
-                {
-                    entries[key] = value;
-                }
-            }
+            using StreamReader reader = new StreamReader(path, Encoding.UTF8);
+            return Parse(reader);
         }
         catch (Exception ex)
         {
             Plugin.Log.LogWarning($"Could not read the language file \"{path}\". {ex.Message}");
+            return new Dictionary<string, string>(StringComparer.Ordinal);
+        }
+    }
+
+    private static Dictionary<string, string> Parse(TextReader reader)
+    {
+        Dictionary<string, string> entries = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            string trimmed = line.Trim();
+            if (trimmed.Length == 0 || trimmed[0] == '#')
+            {
+                continue;
+            }
+
+            int separator = trimmed.IndexOf('=');
+            if (separator <= 0)
+            {
+                continue;
+            }
+
+            string key = trimmed.Substring(0, separator).Trim();
+            string value = trimmed.Substring(separator + 1).Trim();
+            if (key.Length > 0 && value.Length > 0)
+            {
+                entries[key] = value;
+            }
         }
 
         return entries;
@@ -137,21 +183,7 @@ internal static class LanguageFiles
 
     private static IEnumerable<KeyValuePair<string, string>> EnglishEntries()
     {
-        List<KeyValuePair<string, string>> entries = new List<KeyValuePair<string, string>>();
-
-        foreach (FieldInfo field in typeof(StringKeys).GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static))
-        {
-            if (field.FieldType != typeof(string) || field.GetValue(null) is not string key)
-            {
-                continue;
-            }
-
-            if (StringTables.TryGet(StringTables.FallbackLocaleCode, key, out string text))
-            {
-                entries.Add(new KeyValuePair<string, string>(key, text));
-            }
-        }
-
+        List<KeyValuePair<string, string>> entries = new List<KeyValuePair<string, string>>(StringTables.Fallback);
         entries.Sort((left, right) => string.Compare(left.Key, right.Key, StringComparison.Ordinal));
         return entries;
     }

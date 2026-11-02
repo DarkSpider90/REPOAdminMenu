@@ -1,4 +1,5 @@
 using System;
+using AdminMenu.Localization;
 using MenuLib;
 using MenuLib.MonoBehaviors;
 using UnityEngine;
@@ -42,7 +43,7 @@ internal static class MenuBuilder
     internal static REPOPopupPage CreatePage(string title)
     {
         REPOPopupPage page = MenuAPI.CreateREPOPopupPage(
-            title,
+            Strings.ForDisplay(title),
             REPOPopupPage.PresetSide.Left,
             shouldCachePage: false,
             pageDimmerVisibility: true,
@@ -56,7 +57,7 @@ internal static class MenuBuilder
     {
         page.AddElementToScrollView(scrollView =>
         {
-            REPOButton button = MenuAPI.CreateREPOButton(text, onClick, scrollView);
+            REPOButton button = MenuAPI.CreateREPOButton(Strings.ForDisplay(text), onClick, scrollView);
             MenuFont.Apply(button.labelTMP);
             return button.rectTransform;
         });
@@ -83,7 +84,7 @@ internal static class MenuBuilder
             for (int i = 0; i < buttons.Length; i++)
             {
                 REPOButton button = MenuAPI.CreateREPOButton(
-                    buttons[i].Text,
+                    Strings.ForDisplay(buttons[i].Text),
                     buttons[i].OnClick,
                     rectTransform,
                     new Vector2(RowStep * i, 0f));
@@ -103,7 +104,7 @@ internal static class MenuBuilder
     {
         page.AddElementToScrollView(scrollView =>
         {
-            REPOToggle toggle = MenuAPI.CreateREPOToggle(text, onToggle, scrollView, defaultValue: value);
+            REPOToggle toggle = MenuAPI.CreateREPOToggle(Strings.ForDisplay(text), onToggle, scrollView, defaultValue: value);
             return toggle.rectTransform;
         });
     }
@@ -114,7 +115,7 @@ internal static class MenuBuilder
 
         page.AddElementToScrollView(scrollView =>
         {
-            REPOLabel label = MenuAPI.CreateREPOLabel(text, scrollView);
+            REPOLabel label = MenuAPI.CreateREPOLabel(Strings.ForDisplay(text), scrollView);
             MenuFont.ApplyToLabel(label, width);
             return label.rectTransform;
         });
@@ -135,7 +136,7 @@ internal static class MenuBuilder
         page.AddElementToScrollView(scrollView =>
         {
             REPOSlider slider = MenuAPI.CreateREPOSlider(
-                text,
+                Strings.ForDisplay(text),
                 string.Empty,
                 onChanged,
                 scrollView,
@@ -168,15 +169,16 @@ internal static class MenuBuilder
         }
 
         int index = Mathf.Clamp(selected, 0, options.Length - 1);
+        string[] shown = Array.ConvertAll(options, Strings.ForDisplay);
 
         page.AddElementToScrollView(scrollView =>
             MenuAPI.CreateREPOSlider(
-                text,
+                Strings.ForDisplay(text),
                 string.Empty,
                 onChanged,
                 scrollView,
-                options,
-                options[index]).rectTransform);
+                shown,
+                shown[index]).rectTransform);
     }
 
     /// <summary>
@@ -188,11 +190,11 @@ internal static class MenuBuilder
         page.AddElementToScrollView(scrollView =>
         {
             REPOInputField field = MenuAPI.CreateREPOInputField(
-                label,
+                Strings.ForDisplay(label),
                 onSubmit,
                 scrollView,
                 onlyNotifyOnSubmit: true,
-                placeholder: label,
+                placeholder: Strings.ForDisplay(label),
                 defaultValue: value ?? string.Empty);
 
             return field.rectTransform;

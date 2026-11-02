@@ -21,8 +21,6 @@ internal static class UpgradeCatalog
 {
     internal const string StatsKeyPrefix = "playerUpgrade";
 
-    private const string CategoryName = "Upgrades";
-
     private static readonly List<CatalogEntry<string>> Entries = new List<CatalogEntry<string>>();
     private static List<CatalogGroup<string>> _groups = new List<CatalogGroup<string>>();
 
@@ -197,7 +195,7 @@ internal static class UpgradeCatalog
         Entries.Add(new CatalogEntry<string>(
             upgradeId,
             displayName,
-            CategoryName,
+            Strings.Get(StringKeys.CategoryUpgrades),
             0,
             modded ? ContentSource.Mod : ContentSource.Vanilla,
             StatsKeyFor(upgradeId)));

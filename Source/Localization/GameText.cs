@@ -43,6 +43,54 @@ internal static class GameText
     /// </summary>
     internal static string FromPrefabName(string prefabName)
     {
+        return Humanize(StripKind(prefabName));
+    }
+
+    /// <summary>
+    /// Name for a valuable. The game gives valuables no translated name at all, so in any
+    /// language but English the mod's own table is used: the thing, then the level it comes
+    /// from ("Ваза (Поместье)"). Anything the table lacks keeps the game's English name.
+    /// </summary>
+    internal static string ForValuable(string prefabName)
+    {
+        string name = StripKind(prefabName);
+
+        if (!Strings.TryGetLocal(StringKeys.ValuableNamePrefix + name, out string thing))
+        {
+            return Humanize(name);
+        }
+
+        foreach (string theme in ValuableThemes)
+        {
+            if (name.StartsWith(theme + " ", StringComparison.Ordinal) &&
+                Strings.TryGetLocal(StringKeys.ValuableThemePrefix + theme, out string place))
+            {
+                return Strings.Format(StringKeys.ValuableNameFormat, thing, place);
+            }
+        }
+
+        return thing;
+    }
+
+    /// <summary>
+    /// Name for a level the game left without a translated name - the lobby, the arenas, the
+    /// tutorial - or for telling apart levels that share one, such as the shops.
+    /// </summary>
+    internal static string ForLevel(string levelName, string fallback)
+    {
+        string name = StripKind(levelName);
+
+        if (Strings.TryGetLocal(StringKeys.LevelNamePrefix + name, out string text))
+        {
+            return text;
+        }
+
+        return string.IsNullOrWhiteSpace(fallback) ? Humanize(name) : fallback;
+    }
+
+    /// <summary>The prefab name without the kind it starts with, untouched otherwise.</summary>
+    private static string StripKind(string prefabName)
+    {
         if (string.IsNullOrWhiteSpace(prefabName))
         {
             return string.Empty;
@@ -53,12 +101,11 @@ internal static class GameText
         {
             if (name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
             {
-                name = name.Substring(prefix.Length).Trim();
-                break;
+                return name.Substring(prefix.Length).Trim();
             }
         }
 
-        return Humanize(name);
+        return name;
     }
 
     /// <summary>
@@ -98,6 +145,9 @@ internal static class GameText
 
         return builder.ToString();
     }
+
+    /// <summary>The level themes valuable prefabs are named after.</summary>
+    private static readonly string[] ValuableThemes = { "Arctic", "Desert", "Manor", "Museum", "Wizard" };
 
     private static readonly string[] PrefabPrefixes =
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using AdminMenu.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -168,8 +169,9 @@ internal sealed class ScreenNotice : MonoBehaviour
             return;
         }
 
-        _label.text = text;
-        _shadow.text = text;
+        string shown = Strings.ForDisplay(text);
+        _label.text = shown;
+        _shadow.text = shown;
         _group.alpha = 1f;
 
         if (seconds > 0f)
