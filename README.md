@@ -24,6 +24,47 @@ Press **F8** during a run and it opens. Only the host gets it.
 - **Two mischief switches.** Enemies die in one hit, and batteries never run out.
 - **Your language.** The menu speaks English and Russian, and item, enemy and upgrade names come from the game, so they are already in whatever language you play in.
 
+## Showcase
+
+### The menu
+
+Press F8 during a run. Four places to go, and a way back from anywhere.
+
+![Admin Menu](https://raw.githubusercontent.com/DarkSpider90/REPOAdminMenu/main/Img/menu-main.png)
+
+---
+
+### A player
+
+Switches at the top, then upgrades and teleports, then the things you do once.
+
+![Players](https://raw.githubusercontent.com/DarkSpider90/REPOAdminMenu/main/Img/menu-players.webp)
+
+---
+
+### Spawning
+
+Pick who it lands next to, then pick what. Shop items, valuables, enemies and cosmetic boxes, all searchable.
+
+![Spawn](https://raw.githubusercontent.com/DarkSpider90/REPOAdminMenu/main/Img/menu-spawn.webp)
+
+---
+
+### The run
+
+Change the level, set how far along the run is, open or finish the extraction point, and put everything worth taking on the map.
+
+![Level](https://raw.githubusercontent.com/DarkSpider90/REPOAdminMenu/main/Img/menu-level.webp)
+
+---
+
+### The shop
+
+Set the money to whatever you like, or make the whole shop free.
+
+![Shop](https://raw.githubusercontent.com/DarkSpider90/REPOAdminMenu/main/Img/menu-shop.webp)
+
+
 ## Multiplayer
 
 Most of it works for the whole lobby and nobody else needs the mod. Upgrades, invisibility, teleport, healing, killing, reviving, spawning, level changes, money, the free shop, the extraction points, one-hit enemies and the batteries all go through the game itself.

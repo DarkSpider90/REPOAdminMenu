@@ -14,6 +14,7 @@ stage_*/
 # Local editor and OS files
 .vs/
 .idea/
+.serena/
 *.user
 
 # Third-party sources kept locally while writing this mod, not ours to redistribute:
