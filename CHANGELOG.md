@@ -6,6 +6,7 @@
 - Category names (item kinds, valuable sizes, enemy difficulty, level groups) are translated too; they were English in every language.
 - Arabic is joined and laid out right to left, with player names and numbers kept readable.
 - Valuables, which the game names only in English, get adapted names in every language, with the level they come from ("Ваза (Поместье)"). Levels the game leaves unnamed - lobby, arenas, tutorial, the shops - are named too.
+- Your own wording fixes now live in `BepInEx/config/AdminMenu/Languages`, so a mod update no longer deletes them. The language template is written in your game's language with the current translation, and lines with a typo in the key or a broken `{0}` are skipped with a note in the log.
 
 ## 0.8.0
 

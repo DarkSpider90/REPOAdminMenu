@@ -31,10 +31,16 @@ public sealed class Plugin : BaseUnityPlugin
 
         LanguageFiles.LoadEmbedded();
         LanguageFiles.LoadAll();
-        if (AdminMenuSettings.WriteLanguageTemplate.Value)
+
+        // Turned on in-game through REPOConfig: the language is already known, so write now
+        // rather than on the next start. At startup the patch on LocalizationManager does it.
+        AdminMenuSettings.WriteLanguageTemplate.SettingChanged += (_, _) =>
         {
-            LanguageFiles.WriteTemplate();
-        }
+            if (LocalizationManager.instance != null)
+            {
+                LanguageFiles.WriteTemplateIfRequested();
+            }
+        };
 
         ApplyPatches();
 

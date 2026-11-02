@@ -50,7 +50,8 @@ internal static class AdminMenuSettings
 
         WriteLanguageTemplate = config.Bind(
             "Localization", "WriteLanguageTemplate", false,
-            "Write Languages/template.lang beside the mod on the next start, listing every menu " +
-            "string in English. Turn on to start a translation.");
+            "Write every line of the menu, as it reads in the game's current language, to " +
+            "BepInEx/config/AdminMenu/Languages/<language>.template.lang. Copy it to <language>.lang " +
+            "there and edit it to change the menu's wording. Switches itself back off once written.");
     }
 }

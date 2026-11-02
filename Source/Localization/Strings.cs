@@ -45,14 +45,23 @@ internal static class Strings
     {
         text = null;
         string code = ActiveLocaleCode();
-        string baseCode = BaseLocaleCode(code);
+        return !IsEnglish(code) && TryGetIn(code, key, out text);
+    }
 
-        if (string.Equals(baseCode ?? code, StringTables.FallbackLocaleCode, StringComparison.OrdinalIgnoreCase))
-        {
-            return false;
-        }
+    /// <summary>
+    /// Text for a key in one language - its own table, then its base language's - with no
+    /// English fallback.
+    /// </summary>
+    internal static bool TryGetIn(string localeCode, string key, out string text)
+    {
+        return StringTables.TryGet(localeCode, key, out text) ||
+               StringTables.TryGet(BaseLocaleCode(localeCode), key, out text);
+    }
 
-        return StringTables.TryGet(code, key, out text) || StringTables.TryGet(baseCode, key, out text);
+    internal static bool IsEnglish(string localeCode)
+    {
+        string language = BaseLocaleCode(localeCode) ?? localeCode;
+        return string.Equals(language, StringTables.FallbackLocaleCode, StringComparison.OrdinalIgnoreCase);
     }
 
     internal static string Format(string key, params object[] args)

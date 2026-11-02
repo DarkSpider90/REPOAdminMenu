@@ -98,7 +98,13 @@ You can also change everything in-game through REPOConfig if you have it.
 
 ### Localization
 
-**Write Language Template** — off by default. If you want to change a translation, turn this on and start the game once. The mod creates `Languages/template.lang` next to itself with every line of the menu. Copy it to your language code (for example `ru.lang`), edit the text, and the menu uses your version.
+**Write Language Template** — off by default. Use it if you want to change how the menu words something.
+
+1. Turn it on. The mod writes every line of the menu, in your game's language, to `BepInEx/config/AdminMenu/Languages/<language>.template.lang` (for example `ru-RU.template.lang`) and switches the setting back off.
+2. Copy that file to `<language>.lang` in the same folder (for example `ru-RU.lang`).
+3. Delete the lines you do not want to change, edit the text after `=` in the ones you keep, and restart the game.
+
+Your file lives in the config folder, so mod updates do not touch it. If a line has a typo in its name, or is missing a `{0}` the original had, the mod ignores that line and says so in the BepInEx log.
 
 ### Diagnostics
 
