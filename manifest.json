@@ -1,8 +1,8 @@
 {
   "name": "AdminMenu",
-  "version_number": "0.8.0",
+  "version_number": "1.0.0",
   "website_url": "https://github.com/DarkSpider90/REPOAdminMenu.git",
-  "description": "Host admin menu for R.E.P.O. - players, upgrades, spawning and level control.",
+  "description": "Host admin menu for R.E.P.O. - players, upgrades, spawning and level control, in every language the game supports.",
   "dependencies": [
     "BepInEx-BepInExPack-5.4.2305",
     "Zehs-REPOLib-4.3.0",

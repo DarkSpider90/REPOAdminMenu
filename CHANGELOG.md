@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.0.0
 
 - The menu is translated into all 21 languages the game ships and switches with the game's language setting.
 - Category names (item kinds, valuable sizes, enemy difficulty, level groups) are translated too; they were English in every language.
