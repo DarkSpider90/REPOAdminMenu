@@ -1,0 +1,21 @@
+# Build outputs
+bin/
+obj/
+dist/
+
+# Local packaging/staging folders
+stage_*/
+*.zip
+
+# Debug symbols and transient .NET files
+*.pdb
+*.deps.json
+
+# Local editor and OS files
+.vs/
+.idea/
+*.user
+
+# Third-party sources kept locally while writing this mod, not ours to redistribute:
+# proferabg's RepoAdminMenu and MenuLib. The recipes taken from them are credited in LICENSE.
+Reference/
