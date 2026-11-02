@@ -125,10 +125,6 @@ Without REPOLib the menu still opens and most of it works, but nothing can be sp
 
 ---
 
-## Credits
-
-Thanks to proferabg and his RepoAdminMenu, which was the reference for how a few of these things are done in R.E.P.O.
-
 ## Licence
 
 MIT. See `LICENSE`.

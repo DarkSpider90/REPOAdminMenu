@@ -15,8 +15,8 @@ namespace AdminMenu.Upgrades;
 /// level becomes the difference from the current one; a negative difference runs the same
 /// <c>UpgradePlayer*</c> method in reverse, which is what makes removal unwind the effect -
 /// max health, stamina, grab range - instead of leaving it applied with a smaller number
-/// beside it. The reference mod's route, the thirteen <c>Update*RightAway</c> methods, is
-/// gone in v0.5.0: they are private now and themselves take a delta.
+/// beside it. The thirteen <c>Update*RightAway</c> methods are not a way in: in v0.5.0 they
+/// are private and themselves take a delta.
 ///
 /// A modded upgrade goes through <c>REPOLib.PlayerUpgrade.SetLevel</c>, which runs the mod's
 /// own upgrade action and raises REPOLib's networked event. The game's RPC cannot do this:

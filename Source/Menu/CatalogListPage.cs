@@ -11,8 +11,8 @@ namespace AdminMenu.Menu;
 /// One page for every content list: items, valuables, enemies, cosmetic boxes, levels.
 ///
 /// It takes a catalog and something to do with an entry, so all five lists share this page
-/// instead of each getting one of its own - the reference mod had seven near-identical pages
-/// for the seven valuable sizes alone, and a new size would have needed an eighth.
+/// instead of each getting one of its own. Written out by hand, the valuable sizes alone would
+/// be seven near-identical pages, and an eighth the day the game adds a size.
 ///
 /// A list is either grouped or flat. Items and valuables are worth splitting by the game's own
 /// categories; enemies are not, because there are few enough of them to read at once and the

@@ -15,9 +15,9 @@ namespace AdminMenu.Catalog;
 ///
 /// An <c>EnemySetup</c> carries no name of its own; the readable one sits on the
 /// <c>EnemyParent</c> of its first spawn object, which costs one prefab load to reach. Those
-/// names are resolved once per rebuild and kept for the rest of it - this is what replaces
-/// the reference's hand-written table of twenty-nine display names, which went out of date
-/// the moment the game added an enemy.
+/// names are resolved once per rebuild and kept for the rest of it. This is why there is no
+/// list of enemy names anywhere in this mod: one would go out of date the day the game adds
+/// an enemy, and sooner than that for anyone running a content mod.
 /// </summary>
 internal static class EnemyCatalog
 {

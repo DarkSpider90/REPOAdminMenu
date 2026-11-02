@@ -17,6 +17,5 @@ stage_*/
 .serena/
 *.user
 
-# Third-party sources kept locally while writing this mod, not ours to redistribute:
-# proferabg's RepoAdminMenu and MenuLib. The recipes taken from them are credited in LICENSE.
+# Third-party sources kept locally for study while writing this mod. Not ours to redistribute.
 Reference/

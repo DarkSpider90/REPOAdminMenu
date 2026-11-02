@@ -15,9 +15,9 @@ namespace AdminMenu.Actions;
 /// <c>EnemyDirector.debugNoVision</c> and checks it exactly where it matters: in the vision
 /// loop that scans for players, in <c>Enemy.SetChaseTarget</c>, and in the Thin Man's own
 /// look-up. So a player on that list is never picked as a target in the first place, rather
-/// than being picked and then wrestled free - which is what the reference mod did with
-/// forty-two patches that rewrote enemy state from outside and crashed the enemies whose
-/// classes it had guessed wrong.
+/// than being picked and then wrestled free. That distinction is the whole feature: suppressing
+/// the choice costs no patches at all, while rewriting an enemy's state from outside costs one
+/// patch per enemy type and breaks the day the game adds another.
 ///
 /// The list is filled through <c>PunManager.TesterNoAggroCommandRPC</c>, which the game
 /// authorises for the host and applies on every client.

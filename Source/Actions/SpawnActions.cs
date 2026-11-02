@@ -10,11 +10,9 @@ namespace AdminMenu.Actions;
 /// Puts something in the world next to the target player.
 ///
 /// Everything goes through REPOLib, which spawns a network prefab the whole lobby receives and
-/// refuses the call when the caller is not the host. That also replaces the reference mod's
-/// hand-rolled enemy spawn, which had to switch off the enemy despawner while it worked:
-/// REPOLib 4.3.0 brackets the spawn with the game's own
-/// <c>EnemiesSpawnedRemoveStart</c>/<c>End</c>, so no patch is needed to keep a fresh enemy
-/// from being cleaned up.
+/// refuses the call when the caller is not the host. For enemies it also brackets the spawn
+/// with the game's own <c>EnemiesSpawnedRemoveStart</c>/<c>End</c>, so nothing has to be
+/// patched to stop the despawner cleaning up an enemy the moment it arrives.
 ///
 /// Without REPOLib there is no spawning at all, and the menu says so rather than quietly
 /// instantiating something only the host can see.
